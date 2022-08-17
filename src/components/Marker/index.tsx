@@ -1,6 +1,5 @@
 import * as React from "react";
 import Flight from "@mui/icons-material/Flight";
-import { Typography } from "@mui/material";
 const MARKER_SIZE = 10;
 
 type Prop = {

@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import AutoCompleteInput from "../AutoCompleteInput";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 
 const Item = styled(Paper)(({ theme }) => ({

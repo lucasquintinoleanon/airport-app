@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { getAirports } from "../api/airports";
 import haversine from "../utils/haversine";

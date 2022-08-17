@@ -14,6 +14,7 @@ export type Airport = {
 
 type DataContextData = {
   airports: Array<Airport>;
+  airportsDefault: Array<Airport>;
   center: Center;
   zoom: number;
   distance: number;
@@ -24,6 +25,7 @@ type DataContextData = {
   setMap: (value: any) => void;
   setMaps: (value: any) => void;
   handleCalculate: () => void;
+  handleReset: () => void;
 };
 
 type DataProviderProps = {
@@ -47,6 +49,7 @@ const airport: Airport = {
 export const DataContext = createContext({} as DataContextData);
 
 export function DataProvider({ children }: DataProviderProps) {
+  const [airportsDefault, setAirportsDefault] = useState<Array<Airport>>([]);
   const [airports, setAirports] = useState<Array<Airport>>([]);
   const [center, setCenter] = useState<Center>({
     lat: 39.8097343,
@@ -119,10 +122,15 @@ export function DataProvider({ children }: DataProviderProps) {
     }
   };
 
+  const handleReset = () => {
+    setAirports(airportsDefault);
+  }
+
   useEffect(() => {
     const onLoad = async () => {
       const res = await getAirports();
       setAirports(res?.data?.response);
+      setAirportsDefault(res?.data?.response)
     };
     onLoad();
   }, []);
@@ -131,6 +139,7 @@ export function DataProvider({ children }: DataProviderProps) {
     <DataContext.Provider
       value={{
         airports,
+        airportsDefault,
         center,
         zoom,
         start,
@@ -140,6 +149,7 @@ export function DataProvider({ children }: DataProviderProps) {
         setEnd,
         setMap,
         setMaps,
+        handleReset,
         handleCalculate,
       }}
     >

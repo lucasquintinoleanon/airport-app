@@ -11,7 +11,7 @@ type Prop = {
 };
 
 export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
-  const { airports } = React.useContext(DataContext);
+  const { airportsDefault } = React.useContext(DataContext);
   const filterOptions = createFilterOptions({
     matchFrom: "any",
     stringify: (option: Airport) => option.name + option.iata_code,
@@ -20,9 +20,12 @@ export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
     <Autocomplete
       id="country-select-demo"
       sx={{ width: 300 }}
-      options={airports}
+      options={airportsDefault}
       autoHighlight
       value={value}
+      // onInputChange={(event, newInputValue) => {
+      //   handleReset()
+      // }}
       onChange={(event: any, newValue: Airport | null) => {
         console.log(newValue)
         onSelect(newValue);

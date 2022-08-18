@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 import CloseIcon from "@mui/icons-material/Close";
 import DistanceDisplay from "../DistanceDisplay";
+import Logo from "../Logo";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -19,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: "10vh",
   color: theme.palette.text.secondary,
   [theme.breakpoints.down("sm")]: {
-    height: "50vh",
+    height: "60vh",
     justifyContent: "center",
     flexDirection: "column",
   },
@@ -55,6 +56,7 @@ export default function Header() {
     <Box sx={{ width: "100%" }}>
       <Item>
         <Stack direction={smallDevice ? "column" : "row"} spacing={5}>
+          <Logo/>
           <AutoCompleteInput
             label="Starting Airport..."
             value={start}

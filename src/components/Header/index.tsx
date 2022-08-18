@@ -31,8 +31,8 @@ const ResetButton = styled(Button)(({ theme }) => ({
   ...theme.typography.body2,
   marginLeft: "auto",
   height: 56,
-  fontSize: "1rem",
-
+  fontSize: "0.75rem",
+  lineHeight: '0.75rem',
   [theme.breakpoints.down("sm")]: {
     marginLeft: 0,
     marginTop: theme.spacing(4),
@@ -69,7 +69,8 @@ export default function Header() {
           />
           <Button
             variant="contained"
-            sx={{ fontSize: "1rem" }}
+            size="small"
+            sx={{ fontSize: "0.75rem", }}
             onClick={() => {
               handleCalculate();
             }}
@@ -82,6 +83,7 @@ export default function Header() {
           <ResetButton
             variant="outlined"
             color="secondary"
+            size="small"
             onClick={() => {
               handleReset();
             }}

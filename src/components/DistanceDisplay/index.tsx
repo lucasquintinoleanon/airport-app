@@ -10,7 +10,7 @@ const Distance = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   textTransform: "initial",
-  fontSize: 32,
+  fontSize: '1.25rem',
 }));
 
 export default function DistanceDisplay() {

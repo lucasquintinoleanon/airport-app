@@ -13,11 +13,11 @@ type Prop = {
 
 const CustomAutocomplete: any = styled(Autocomplete)(({ theme }) => ({
   width: '18vw',
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
   [theme.breakpoints.down("xl")]: {
     width:'16vw',
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
   },
 }));
 

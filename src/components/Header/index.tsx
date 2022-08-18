@@ -6,6 +6,8 @@ import { styled } from "@mui/material/styles";
 import AutoCompleteInput from "../AutoCompleteInput";
 import { Button } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
+import CloseIcon from "@mui/icons-material/Close";
+import DistanceDisplay from "../DistanceDisplay";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -17,22 +19,36 @@ const Item = styled(Paper)(({ theme }) => ({
   height: "10vh",
   color: theme.palette.text.secondary,
   [theme.breakpoints.down("sm")]: {
-    height: "40vh",
+    height: "50vh",
     justifyContent: "center",
+    flexDirection: "column",
   },
 }));
 
-const Distance = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 32,
+const ResetButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  marginLeft: "auto",
+  height: 56,
+  fontSize: "1rem",
+
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: 0,
+    marginTop: theme.spacing(4),
+    width: "90%",
+  },
 }));
 
 export default function Header() {
-  const { setStart, setEnd, start, end, handleCalculate, distance } =
-    React.useContext(DataContext);
+  const {
+    setStart,
+    setEnd,
+    start,
+    end,
+    handleCalculate,
+    distance,
+    handleReset,
+  } = React.useContext(DataContext);
 
   const smallDevice = window.innerWidth < 600;
   return (
@@ -51,14 +67,26 @@ export default function Header() {
           />
           <Button
             variant="contained"
+            sx={{ fontSize: "1rem" }}
             onClick={() => {
               handleCalculate();
             }}
           >
             Calculate
           </Button>
-          {!!distance && <Distance>{distance} nmi</Distance>}
+          {!!distance && <DistanceDisplay />}
         </Stack>
+        {!!distance && (
+          <ResetButton
+            variant="outlined"
+            color="secondary"
+            onClick={() => {
+              handleReset();
+            }}
+          >
+            Reset <CloseIcon fontSize="small" />
+          </ResetButton>
+        )}
       </Item>
     </Box>
   );

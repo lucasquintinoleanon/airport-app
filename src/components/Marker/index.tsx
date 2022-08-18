@@ -21,9 +21,7 @@ export default function Marker({ text, lat, lng }: Prop) {
       }}
     >
       <Flight color="primary" />
-     
-        {text}
-      
+      {text}
     </div>
   );
 }

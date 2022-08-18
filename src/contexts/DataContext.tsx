@@ -55,7 +55,7 @@ export function DataProvider({ children }: DataProviderProps) {
     lat: 39.8097343,
     lng: -98.5556199,
   });
-  const [zoom, setZoom] = useState<number>(3);
+  const [zoom, setZoom] = useState<number>(4.5);
   const [start, setStart] = useState<Airport>(airport);
   const [end, setEnd] = useState<Airport>(airport);
   const [distance, setDistance] = useState<number>(0);
@@ -99,14 +99,11 @@ export function DataProvider({ children }: DataProviderProps) {
   };
 
   const handleCalculate = () => {
-    console.log('start', start)
     if (start.icao_code && end.icao_code) {
       const options = {
         unit: "nmi",
         threshold: 1,
       };
-      console.log("se", start, end);
-
       let distance = Math.round(haversine(start, end, options)),
         newCenter = midpoint(start, end),
         zoom = scaleZoom(distance);
@@ -116,14 +113,21 @@ export function DataProvider({ children }: DataProviderProps) {
       setCenter({ lat: newCenter[0], lng: newCenter[1] });
       setZoom(zoom);
       drawFlightPath();
-      console.log("distance", distance);
-      console.log("newCenter", newCenter);
-      console.log("zoom", zoom);
     }
   };
 
   const handleReset = () => {
     setAirports(airportsDefault);
+    polyline.setMap(null);
+    setDistance(0);
+    setPolyline(null)
+    setCenter({
+      lat: 39.8097343,
+      lng: -98.5556199,
+    })
+    setZoom(4.5)
+    setStart(airport)
+    setEnd(airport)
   }
 
   useEffect(() => {

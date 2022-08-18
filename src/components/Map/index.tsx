@@ -4,7 +4,7 @@ import { DataContext } from "../../contexts/DataContext";
 import { mapStyles } from "../../constants";
 import Marker from "../Marker";
 
-export default function SimpleMap() {
+export default function Map() {
   const { airports, center, zoom, setMap, setMaps} =
     React.useContext(DataContext);
 
@@ -19,10 +19,9 @@ export default function SimpleMap() {
   });
 
   return (
-    // Important! Always set the container height explicitly
     <div style={{ height: "90vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBnHtmeHlo4x_kDwI1uOpujA_XhES_lkOc" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_KEY as string }}
         onGoogleApiLoaded={({ map, maps }) => {
           setMap(map);
           setMaps(maps);

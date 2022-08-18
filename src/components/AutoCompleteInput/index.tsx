@@ -27,7 +27,6 @@ export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
       //   handleReset()
       // }}
       onChange={(event: any, newValue: Airport | null) => {
-        console.log(newValue)
         onSelect(newValue);
       }}
       getOptionLabel={(option: Airport) => option.name}

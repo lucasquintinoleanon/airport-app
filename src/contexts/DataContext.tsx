@@ -115,7 +115,8 @@ export function DataProvider({ children }: DataProviderProps) {
   useEffect(() => {
     const onLoad = async () => {
       const res = await getAirports();
-      setAirportsDefault(res?.data?.response);
+      const sortedArray = res?.data?.response?.sort((a: Airport, b: Airport) => a.name > b.name ? 1 : -1);
+      setAirportsDefault(sortedArray);
     };
     onLoad();
   }, []);

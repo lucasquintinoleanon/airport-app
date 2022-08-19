@@ -6,22 +6,23 @@ import { DataContext } from "../../contexts/DataContext";
 import { CustomAutocomplete } from "./styles";
 import { Airport, AutoCompleteProp } from "../../types";
 
-
-
 //COMPONENET THAT SELECT ONE OF THE AVAILABLE AIRPORTS
-export default function AutoCompleteInput({ label, value, onSelect }: AutoCompleteProp) {
-  const { airportsDefault, setCenter } =
-    React.useContext(DataContext);
+export default function AutoCompleteInput({
+  label,
+  value,
+  onSelect,
+}: AutoCompleteProp) {
+  const { airportsDefault, setCenter } = React.useContext(DataContext);
   const filterOptions = createFilterOptions({
     matchFrom: "any",
-    stringify: (option: Airport) => option.name + option.iata_code,
+    stringify: ({ name, iata_code }: Airport) => `${name} (${iata_code})`,
   });
   return (
     <CustomAutocomplete
-      id="country-select-demo"
       options={airportsDefault}
       autoHighlight
       value={value}
+      loading={!airportsDefault.length}
       onChange={(event: any, newValue: Airport | null) => {
         //SELECT THE AIRPORT AND RECENTER MAP
         onSelect(newValue);
@@ -31,11 +32,13 @@ export default function AutoCompleteInput({ label, value, onSelect }: AutoComple
       }}
       getOptionLabel={(option: Airport) => option.name}
       filterOptions={filterOptions}
-      renderOption={(props: any, option: Airport) => (
-        <Box component="li" {...props}>
-          {option.name} ({option.iata_code})
-        </Box>
-      )}
+      renderOption={(props: any, option: Airport) => {
+        return (
+          <Box component="li" {...props} key={props.id}>
+            {option.name} {option.iata_code && `(${option.iata_code})`}
+          </Box>
+        );
+      }}
       renderInput={(params: any) => (
         <TextField
           {...params}

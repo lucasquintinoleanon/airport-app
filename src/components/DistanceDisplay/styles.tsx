@@ -1,0 +1,13 @@
+import { styled } from "@mui/material/styles";
+
+export const Distance = styled("div")(({ theme }) => ({
+  ...theme.typography.button,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textTransform: "initial",
+  fontSize: "1.25rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1.5rem",
+  },
+}));

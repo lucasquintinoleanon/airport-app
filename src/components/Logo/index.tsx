@@ -1,20 +1,7 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-
 import ConnectingAirportsIcon from '@mui/icons-material/ConnectingAirports';
+import { Container } from "./styles";
 
-const Container = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textTransform: "initial",
-  fontSize: '1.25rem',
-  fontWeight: 'bold',
-  [theme.breakpoints.down("sm")]: {
-    fontSize: 22,
-  },
-}));
 
 export default function Logo() {
   return (

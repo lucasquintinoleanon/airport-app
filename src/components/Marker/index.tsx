@@ -1,14 +1,10 @@
 import * as React from "react";
 import Flight from "@mui/icons-material/Flight";
+import { MarkerProp } from "../../types";
 const MARKER_SIZE = 10;
 
-type Prop = {
-  text: string;
-  lat: number;
-  lng: number;
-};
-
-export default function Marker({ text, lat, lng }: Prop) {
+//COMPONENET THAT RENDER A MARK FOR THE AIRPORT ON THE MAP
+export default function Marker({ text }: MarkerProp) {
   return (
     <div
       style={{

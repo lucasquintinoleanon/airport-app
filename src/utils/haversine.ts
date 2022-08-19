@@ -1,10 +1,13 @@
+
 // https://github.com/njj/haversine with ES6 syntax
 
-const haversine = (start, end, options) => {
+import { Airport } from "../types"
 
-  const toRad = (num) => num * Math.PI / 180
+const haversine = (start: Airport, end: Airport, options: any) => {
 
-  const radii = {
+  const toRad = (num: number) => num * Math.PI / 180
+
+  const radii: any = {
     km:    6371,
     mile:  3960,
     meter: 6371000,

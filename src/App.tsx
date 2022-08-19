@@ -4,6 +4,8 @@ import Map from "./components/Map";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataProvider } from "./contexts/DataContext";
+import { CustomDrawer as Drawer } from "./components/Drawer";
+import { smallDevice } from "./constants";
 
 const darkTheme = createTheme({
   palette: {
@@ -16,7 +18,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <DataProvider>
-        <Header />
+        {smallDevice ? <Drawer /> : <Header />}
         <Map />
       </DataProvider>
     </ThemeProvider>

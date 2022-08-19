@@ -1,45 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
+
 import AutoCompleteInput from "../AutoCompleteInput";
 import { Button } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 import CloseIcon from "@mui/icons-material/Close";
 import DistanceDisplay from "../DistanceDisplay";
 import Logo from "../Logo";
+import { smallDevice } from "../../constants";
+import { Item, ResetButton } from "./styles";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(5),
-  display: "flex",
-  justifyContent: "flex-start",
-  alignItems: "center",
-  height: "10vh",
-  color: theme.palette.text.secondary,
-  [theme.breakpoints.down("sm")]: {
-    height: "60vh",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-}));
 
-const ResetButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  marginLeft: "auto",
-  height: 56,
-  fontSize: "0.75rem",
-  lineHeight: '0.75rem',
-  [theme.breakpoints.down("sm")]: {
-    marginLeft: 0,
-    marginTop: theme.spacing(4),
-    width: "90%",
-  },
-}));
-
+//COMPONENET THAT SHOWS A HEADER ON DESKTOP DEVICES
 export default function Header() {
   const {
     setStart,
@@ -51,12 +24,11 @@ export default function Header() {
     handleReset,
   } = React.useContext(DataContext);
 
-  const smallDevice = window.innerWidth < 600;
   return (
     <Box sx={{ width: "100%" }}>
       <Item>
         <Stack direction={smallDevice ? "column" : "row"} spacing={5}>
-          <Logo/>
+          <Logo />
           <AutoCompleteInput
             label="Starting Airport..."
             value={start}
@@ -69,8 +41,8 @@ export default function Header() {
           />
           <Button
             variant="contained"
-            size="small"
-            sx={{ fontSize: "0.75rem", }}
+            size="large"
+            sx={{ fontSize: "0.75rem", lineHeight: "0.75rem" }}
             onClick={() => {
               handleCalculate();
             }}
@@ -83,7 +55,7 @@ export default function Header() {
           <ResetButton
             variant="outlined"
             color="secondary"
-            size="small"
+            size="large"
             onClick={() => {
               handleReset();
             }}

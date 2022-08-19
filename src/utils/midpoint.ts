@@ -1,10 +1,12 @@
 // http://www.movable-type.co.uk/scripts/latlong.html
 // Math is hard
 
-const midpoint = (start, end) => {
+import { Airport } from "../types";
 
-  const toRad = (num) => num * Math.PI / 180;
-  const toDeg = (rad) => rad / (Math.PI / 180);
+const midpoint = (start: Airport, end: Airport) => {
+
+  const toRad = (num: number) => num * Math.PI / 180;
+  const toDeg = (rad: number) => rad / (Math.PI / 180);
 
   let dLon = toRad(end.lng - start.lng),
       lon1 = toRad(start.lng),

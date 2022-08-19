@@ -1,18 +1,11 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Helper from "../Helper";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import { DataContext } from "../../contexts/DataContext";
+import { Distance } from "./styles";
 
-const Distance = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textTransform: "initial",
-  fontSize: '1.25rem',
-}));
 
+//COMPONENT THAT SHOWS THE DISTANCE BETWEEN AIRPORTS
 export default function DistanceDisplay() {
   const { distance } = React.useContext(DataContext);
   return (

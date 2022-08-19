@@ -1,29 +1,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
-import { Airport, DataContext } from "../../contexts/DataContext";
-import { styled } from "@mui/material/styles";
-
-type Prop = {
-  label: string;
-  onSelect: any;
-  value: Airport
-};
-
-const CustomAutocomplete: any = styled(Autocomplete)(({ theme }) => ({
-  width: '18vw',
-  [theme.breakpoints.down("xl")]: {
-    width:'16vw',
-  },
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
-}));
+import { createFilterOptions } from "@mui/material/Autocomplete";
+import { DataContext } from "../../contexts/DataContext";
+import { CustomAutocomplete } from "./styles";
+import { Airport, AutoCompleteProp } from "../../types";
 
 
-export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
-  const { airportsDefault } = React.useContext(DataContext);
+
+//COMPONENET THAT SELECT ONE OF THE AVAILABLE AIRPORTS
+export default function AutoCompleteInput({ label, value, onSelect }: AutoCompleteProp) {
+  const { airportsDefault, setCenter } =
+    React.useContext(DataContext);
   const filterOptions = createFilterOptions({
     matchFrom: "any",
     stringify: (option: Airport) => option.name + option.iata_code,
@@ -34,15 +22,15 @@ export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
       options={airportsDefault}
       autoHighlight
       value={value}
-      // onInputChange={(event, newInputValue) => {
-      //   handleReset()
-      // }}
       onChange={(event: any, newValue: Airport | null) => {
+        //SELECT THE AIRPORT AND RECENTER MAP
         onSelect(newValue);
+        if (newValue) {
+          setCenter({ lat: newValue.lat, lng: newValue.lng });
+        }
       }}
       getOptionLabel={(option: Airport) => option.name}
       filterOptions={filterOptions}
-      // filterOptions={(options, { inputValue }) => options.filter(item => item?.name?.includes(inputValue) || item?.iata_code?.includes(inputValue) )}
       renderOption={(props: any, option: Airport) => (
         <Box component="li" {...props}>
           {option.name} ({option.iata_code})
@@ -51,7 +39,7 @@ export default function AutoCompleteInput({ label, value, onSelect }: Prop) {
       renderInput={(params: any) => (
         <TextField
           {...params}
-          label={label || ''}
+          label={label || ""}
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill

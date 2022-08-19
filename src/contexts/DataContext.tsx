@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { getAirports } from "../api/airports";
 import { smallDevice } from "../constants";
 import { Airport, Center, DataContextData, DataProviderProps } from "../types";

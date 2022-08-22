@@ -14,12 +14,11 @@ const airport: Airport = {
   lat: 0,
 };
 
-
 export const DataContext = createContext({} as DataContextData);
 
 // CONTEXT THAT PROVIDER ALL INFORMATION FOR THE APP
 export function DataProvider({ children }: DataProviderProps) {
-  const adjustmentZoom = smallDevice ? 2 : 0
+  const adjustmentZoom = smallDevice ? 2 : 0;
   const [airportsDefault, setAirportsDefault] = useState<Array<Airport>>([]);
   const [airports, setAirports] = useState<Array<Airport>>([]);
   const [center, setCenter] = useState<Center>({
@@ -115,12 +114,17 @@ export function DataProvider({ children }: DataProviderProps) {
   useEffect(() => {
     const onLoad = async () => {
       const res = await getAirports();
-      const sortedArray = res?.data?.response?.sort((a: Airport, b: Airport) => a.name > b.name ? 1 : -1);
-      setAirportsDefault(sortedArray);
+      const response = res?.data?.response;
+      const withCode = response.filter((item: Airport) => item.iata_code);
+      const emptyCode = response.filter((item: Airport) => !item.iata_code);
+      const sortedArray = withCode.sort((a: Airport, b: Airport) =>
+        a.iata_code > b.iata_code ? 1 : -1
+      );
+      
+      setAirportsDefault([...sortedArray, ...emptyCode]);
     };
     onLoad();
   }, []);
-
 
   //ON CHANGE THE AIRPORT SELECT
   useEffect(() => {
@@ -129,7 +133,7 @@ export function DataProvider({ children }: DataProviderProps) {
     let newAirportStart = start || airport;
     let newAirportEnd = end || airport;
     setAirports([newAirportStart, newAirportEnd]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [start, end]);
 
   return (
@@ -151,7 +155,7 @@ export function DataProvider({ children }: DataProviderProps) {
         setZoom,
         handleReset,
         handleCalculate,
-        getMetrics
+        getMetrics,
       }}
     >
       {children}

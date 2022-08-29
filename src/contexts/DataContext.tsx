@@ -85,7 +85,7 @@ export function DataProvider({ children }: DataProviderProps) {
 
   //FUNCTION THAHT CACULE AND SET THE STATES
   const handleCalculate = () => {
-    if (start.icao_code && end.icao_code) {
+    if (start.name && end.name) {
       const { distance, newCenter, zoom } = getMetrics(start, end);
       setAirports([start, end]);
       setDistance(distance);

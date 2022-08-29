@@ -8,6 +8,6 @@ export const Distance = styled("div")(({ theme }) => ({
   textTransform: "initial",
   fontSize: "1.25rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
   },
 }));

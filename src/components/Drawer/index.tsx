@@ -46,7 +46,6 @@ export function CustomDrawer() {
       <Box
         sx={{ width: "80vw", padding: "5vw" }}
         role="presentation"
-        onKeyDown={toggleDrawer(false)}
       >
         <Stack direction={"column"} spacing={5}>
           <Logo />
